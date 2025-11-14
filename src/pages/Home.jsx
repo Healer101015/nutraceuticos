@@ -108,7 +108,7 @@ function ProductCard({ product }) {
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="w-full h-56 object-cover"
+          className="w-full h-56 object-cover" // Esta altura fixa com object-cover está correta para cards
           onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x400/e0e0e0/707070?text=Imagem+Indisponível'; }}
         />
         <span className="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -269,7 +269,7 @@ export default function Home() {
             <img
               src={SaladaImg} // Imagem atualizada
               alt="Mulher sorrindo com uma salada e óleo nutracêutico"
-              className="rounded-2xl shadow-2xl max-w-full h-auto" // <-- MUDANÇA AQUI
+              className="rounded-2xl shadow-2xl w-full max-w-lg h-auto" // <-- MUDANÇA AQUI: Adicionado w-full e max-w-lg
               onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e0e0e0/707070?text=Imagem+Principal'; }}
             />
           </div>
@@ -341,11 +341,12 @@ export default function Home() {
                 Baixar Catálogo (PDF)
               </a>
             </div>
-            <div className="order-1 md:order-2">
+            {/* <-- MUDANÇA AQUI: Adicionado padding e flex para centralizar e diminuir a imagem */}
+            <div className="order-1 md:order-2 flex items-center justify-center p-8 md:p-12">
               <img
                 src={OleoDeChiaComSemAboboraImg}
                 alt="Catálogo de produtos Nutracelticos"
-                className="w-full h-auto" // <-- MUDANÇA AQUI
+                className="w-full h-auto max-w-xs rounded-2xl shadow-lg" // <-- MUDANÇA AQUI: max-w-xs (320px)
                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e0e0e0/707070?text=Catálogo'; }}
               />
             </div>
@@ -364,10 +365,11 @@ export default function Home() {
               Veja como é simples transformar sua refeição em um ato de cuidado.
             </p>
           </div>
-          <div className="max-w-3xl mx-auto">
+          {/* <-- MUDANÇA AQUI: Reduzido de max-w-3xl para max-w-2xl --> */}
+          <div className="max-w-2xl mx-auto">
             <video
               src={TempereVideo}
-              className="w-full h-auto rounded-2xl shadow-2xl" // <-- MUDANÇA AQUI
+              className="w-full h-auto rounded-2xl shadow-2xl"
               autoPlay
               loop
               muted
