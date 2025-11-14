@@ -269,7 +269,7 @@ export default function Home() {
             <img
               src={SaladaImg} // Imagem atualizada
               alt="Mulher sorrindo com uma salada e óleo nutracêutico"
-              className="rounded-2xl shadow-2xl max-w-full h-auto"
+              className="rounded-2xl shadow-2xl max-w-full h-auto" // <-- MUDANÇA AQUI
               onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e0e0e0/707070?text=Imagem+Principal'; }}
             />
           </div>
@@ -345,7 +345,7 @@ export default function Home() {
               <img
                 src={OleoDeChiaComSemAboboraImg}
                 alt="Catálogo de produtos Nutracelticos"
-                className="w-full h-64 md:h-full object-cover"
+                className="w-full h-auto" // <-- MUDANÇA AQUI
                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e0e0e0/707070?text=Catálogo'; }}
               />
             </div>
@@ -364,10 +364,10 @@ export default function Home() {
               Veja como é simples transformar sua refeição em um ato de cuidado.
             </p>
           </div>
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <video
               src={TempereVideo}
-              className="w-full rounded-2xl shadow-2xl"
+              className="w-full h-auto rounded-2xl shadow-2xl" // <-- MUDANÇA AQUI
               autoPlay
               loop
               muted
