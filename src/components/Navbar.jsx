@@ -1,78 +1,96 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import logo from "../assets/logo.png";
+import React, { useState } from 'react';
+import { Leaf, Phone, Menu, X } from 'lucide-react';
 
-export default function Navbar({ currentBgColor }) { // Recebe a cor atual como propriedade
-  const [menuOpen, setMenuOpen] = useState(false);
+// --- COMPONENTE DO NAVBAR ---
+export default function Navbar({ onScrollTo }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const WHATSAPP_NUMBER = "5511988865882";
+  const WHATSAPP_GREETING = "Olá! Gostaria de saber mais sobre os óleos nutracêuticos";
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_GREETING)}`;
 
   const navLinks = [
-    { href: "/", label: "Início" },
-    { href: "/agendamento", label: "Agendamento" },
+    { name: "Benefícios", href: "#benefits" },
+    { name: "Produtos", href: "#products" },
+    { name: "FAQ", href: "#faq" },
   ];
 
   return (
-    // O Navbar agora é transparente e usa a cor de fundo apenas no menu mobile.
-    <nav className="sticky top-0 z-50 bg-transparent text-gray-700 backdrop-blur-sm">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Logo Pele Brasileira" className="h-10" />
-        </Link>
-
-        <ul className="hidden md:flex gap-8 text-sm font-medium">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                to={link.href}
-                className="hover:text-rose-400 transition-colors duration-300"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center md:hidden">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="focus:outline-none text-gray-600"
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <div
+            className="flex-shrink-0 flex items-center cursor-pointer"
+            onClick={() => onScrollTo('#home')}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24"
-              stroke="currentColor"
+            <Leaf className="h-8 w-8 text-green-700" />
+            <span className="text-2xl font-extrabold text-green-800 ml-2">
+              Nutracelticos
+            </span>
+          </div>
+
+          {/* Links Desktop */}
+          <div className="hidden md:flex md:items-center md:space-x-8">
+            {navLinks.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => onScrollTo(item.href)}
+                className="text-gray-600 hover:text-green-700 font-medium transition-colors"
+              >
+                {item.name}
+              </button>
+            ))}
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-green-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg transition-all duration-300 hover:bg-green-600 hover:shadow-xl"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+              <Phone className="w-4 h-4 mr-2" />
+              Fale Conosco
+            </a>
+          </div>
+
+          {/* Botão Mobile */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              type="button"
+              className="text-gray-500 hover:text-green-700 focus:outline-none focus:text-green-700"
+              aria-label="Abrir menu"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* O menu mobile usa a cor atual para ter um fundo sólido */}
-      {menuOpen && (
-        <div
-          style={{ backgroundColor: currentBgColor }}
-          className="md:hidden border-t border-gray-200/50 p-4 text-gray-700"
-        >
-          <ul className="flex flex-col gap-4 text-sm">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  to={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 hover:text-rose-400"
-                >
-                  {link.label}
-                </Link>
-              </li>
+      {/* Menu Mobile */}
+      {isOpen && (
+        <div className="md:hidden shadow-lg border-t">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => {
+                  onScrollTo(item.href);
+                  setIsOpen(false);
+                }}
+                className="text-gray-600 hover:bg-green-50 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+              >
+                {item.name}
+              </button>
             ))}
-          </ul>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-500 text-white px-4 py-3 rounded-lg font-bold text-sm shadow-lg transition-all duration-300 hover:bg-green-600 w-full flex items-center justify-center mt-2"
+            >
+              <Phone className="w-4 h-4 mr-2" />
+              Fale Conosco
+            </a>
+          </div>
         </div>
       )}
     </nav>

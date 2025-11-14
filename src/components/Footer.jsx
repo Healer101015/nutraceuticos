@@ -1,64 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Importe o Link
+import React from 'react';
+import { MessageCircle, Phone, MapPin } from 'lucide-react';
 
-export default function Footer() {
+// --- COMPONENTE DO FOOTER ---
+export default function Footer({ onScrollTo }) {
   return (
-    <footer className="bg-white/50 text-gray-700 pt-12 pb-6 shadow-inner backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-
-        {/* Sobre */}
-        <div>
-          <h4 className="font-bold text-lg mb-3 border-b-2 border-rose-100 pb-1 text-gray-800">
-            Pele Brasileira
-          </h4>
-          <p className="text-sm text-gray-600">
-            Excelência em estética clínica e nutracêuticos. Cuidando da sua beleza com ciência e carinho.
+    <footer className="bg-gray-800 text-gray-300 pt-16 pb-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-8">
+        {/* Coluna 1: Sobre */}
+        <div className="md:col-span-2">
+          <h3 className="text-xl font-bold text-white mb-4">Nutracelticos</h3>
+          <p className="text-sm text-gray-400 max-w-md">
+            Saúde e bem-estar através de produtos naturais de alta qualidade. Oferecemos os melhores óleos nutracêuticos para transformar sua alimentação e qualidade de vida.
           </p>
         </div>
 
-        {/* Navegação */}
+        {/* Coluna 2: Links */}
         <div>
-          <h4 className="font-bold text-lg mb-3 border-b-2 border-rose-100 pb-1 text-gray-800">
-            Navegação
-          </h4>
+          <h3 className="text-lg font-semibold text-white mb-4">Links Rápidos</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/" className="hover:text-rose-400 transition-colors">Início</Link></li>
-            <li><Link to="/agendamento" className="hover:text-rose-400 transition-colors">Agendamento</Link></li>
-            <li className="hover:text-rose-400 transition-colors cursor-pointer">Tratamentos</li>
-            <li className="hover:text-rose-400 transition-colors cursor-pointer">Contato</li>
+            <li><button onClick={() => onScrollTo('#products')} className="hover:text-orange-400 transition-colors">Produtos</button></li>
+            <li><button onClick={() => onScrollTo('#benefits')} className="hover:text-orange-400 transition-colors">Benefícios</button></li>
+            <li><button onClick={() => onScrollTo('#faq')} className="hover:text-orange-400 transition-colors">Perguntas Frequentes</button></li>
           </ul>
         </div>
 
-        {/* Redes sociais */}
+        {/* Coluna 3: Contato */}
         <div>
-          <h4 className="font-bold text-lg mb-3 border-b-2 border-rose-100 pb-1 text-gray-800">
-            Siga-nos
-          </h4>
-          <div className="flex gap-4 mt-2">
-            {[
-              { icon: "https://cdn-icons-png.flaticon.com/512/1384/1384005.png", alt: "Instagram", url: "https://www.instagram.com/pele_brasileira_estetica" },
-            ].map((social, i) => (
-              <a
-                key={i}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition transform"
-              >
-                <img
-                  src={social.icon}
-                  alt={social.alt}
-                  className="w-7 filter brightness-90 hover:brightness-110"
-                />
-              </a>
-            ))}
-          </div>
+          <h3 className="text-lg font-semibold text-white mb-4">Contato</h3>
+          <ul className="space-y-2 text-sm">
+            <li className="flex items-center">
+              <Phone className="w-4 h-4 mr-2 text-green-400" />
+              (11) 98886-5882
+            </li>
+            <li className="flex items-center">
+              <MessageCircle className="w-4 h-4 mr-2 text-green-400" />
+              Seg-Sex: 9h-18h
+            </li>
+            <li className="flex items-start">
+              <MapPin className="w-4 h-4 mr-2 mt-1 text-green-400 flex-shrink-0" />
+              Av. Paulista, 807 - Loja 40<br />São Paulo - SP
+            </li>
+          </ul>
         </div>
       </div>
-
-      {/* Copyright */}
-      <div className="mt-10 border-t border-rose-100 pt-4 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} Pele Brasileira — Todos os direitos reservados.
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center border-t border-gray-700 mt-12 pt-8">
+        <p className="text-sm text-gray-500">
+          &copy; {new Date().getFullYear()} Nutracelticos.com.br - Todos os direitos reservados
+        </p>
       </div>
     </footer>
   );
