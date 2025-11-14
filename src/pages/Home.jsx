@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Brain, Flame, Leaf, Check, MessageCircle, Phone, MapPin, ChevronDown, ShoppingCart, Star, HelpCircle, ArrowUp, Menu, X } from 'lucide-react';
+import { Heart, Brain, Flame, Leaf, Check, MessageCircle, Phone, MapPin, ChevronDown, ShoppingCart, Star, HelpCircle, ArrowUp, Menu, X, Download } from 'lucide-react';
+
+// --- IMPORTAÇÃO DOS ARQUIVOS DE MÍDIA ---
+// Importando da pasta src/assets
+import OleoDeChiaImg from '../assets/OleoDeChia.png';
+import OleoDeChiaComGergelinImg from '../assets/OleoDeChiaComGergelin.png';
+import OleoDeChiaComSemAboboraImg from '../assets/OleoDeChiaComSemAbobora.png';
+import OleoDeChiaComAbacateImg from '../assets/OleoDeChiaComAbacate.png';
+import SaladaImg from '../assets/salada.png';
+import TempereVideo from '../assets/tempere a vida.mp4';
+// O 'Catalogo-Oleo-de-Chia.pdf' deve estar na pasta 'public' para o link href funcionar.
 
 // --- DADOS DOS PRODUTOS ---
-// Baseado no seu arquivo HTML
+// Baseado no seu arquivo HTML e PDF de preços
 const productData = [
   {
     id: 1,
     name: "Óleo de Chia Extra Virgem",
     description: "Fonte superior de ômega-3 vegetal. Ideal para saladas e pratos frios.",
-    imageUrl: "https://placehold.co/400x400/2a6b2a/ffffff?text=Óleo+de+Chia",
+    imageUrl: OleoDeChiaImg, // Atualizado para usar a variável importada
     oldPrice: 39.90,
     newPrice: 33.91,
     whatsappText: "Olá! Gostaria de comprar o Óleo de Chia Extra Virgem"
@@ -17,7 +27,7 @@ const productData = [
     id: 2,
     name: "Chia com Gergelim",
     description: "Fusão oriental que reforça a imunidade e promove saúde óssea.",
-    imageUrl: "https://placehold.co/400x400/2a6b2a/ffffff?text=Chia+Gergelim",
+    imageUrl: OleoDeChiaComGergelinImg, // Atualizado para usar a variável importada
     oldPrice: 46.57,
     newPrice: 39.58,
     whatsappText: "Olá! Gostaria de comprar o Óleo de Chia com Gergelim"
@@ -26,7 +36,7 @@ const productData = [
     id: 3,
     name: "Chia com Abóbora",
     description: "Rico em zinco, ideal para saúde masculina e fortalecimento imunológico.",
-    imageUrl: "https://placehold.co/400x400/2a6b2a/ffffff?text=Chia+Abóbora",
+    imageUrl: OleoDeChiaComSemAboboraImg, // Atualizado para usar a variável importada
     oldPrice: 66.59,
     newPrice: 56.60,
     whatsappText: "Olá! Gostaria de comprar o Óleo de Chia com Semente de Abóbora"
@@ -35,7 +45,7 @@ const productData = [
     id: 4,
     name: "Chia com Abacate",
     description: "Fonte de beleza e hidratação, com sabor suave e textura aveludada.",
-    imageUrl: "https://placehold.co/400x400/2a6b2a/ffffff?text=Chia+Abacate",
+    imageUrl: OleoDeChiaComAbacateImg, // Atualizado para usar a variável importada
     oldPrice: 46.57,
     newPrice: 39.58,
     whatsappText: "Olá! Gostaria de comprar o Óleo de Chia com Abacate"
@@ -135,8 +145,6 @@ function ProductCard({ product }) {
   );
 }
 
-// --- COMPONENTE DO NAVBAR (REMOVIDO DAQUI) ---
-
 // --- COMPONENTE FAQ ---
 function FaqItem({ faq, index, openIndex, setOpenIndex }) {
   const isOpen = index === openIndex;
@@ -202,7 +210,6 @@ function ScrollToTopButton({ onScrollTo }) {
 
 
 // --- COMPONENTE PRINCIPAL DA PÁGINA ---
-// (Nome alterado de App para Home)
 export default function Home() {
 
   // Função de rolagem suave
@@ -231,12 +238,8 @@ export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(-1);
 
   return (
-    // O div principal foi removido, pois o `App.jsx` já fornece o container
-    // O id="home" foi movido para o elemento raiz em `App.jsx` se necessário,
-    // mas a função handleScrollTo já trata o seletor '#home' levando ao topo (0,0).
-    // Para manter o layout, vamos usar React.Fragment
     <>
-      {/* */}
+      {/* SEÇÃO HERO */}
       <section className="bg-gradient-to-r from-green-50 to-green-100 py-20 md:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           <div className="text-center md:text-left">
@@ -262,18 +265,18 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="hidden md:block">
+          <div className="flex justify-center items-center">
             <img
-              src="https://placehold.co/600x400/2a6b2a/ffffff?text=Nutracelticos&font=montserrat"
-              alt="Frascos de óleos nutracêuticos"
-              className="rounded-2xl shadow-2xl"
+              src={SaladaImg} // Imagem atualizada
+              alt="Mulher sorrindo com uma salada e óleo nutracêutico"
+              className="rounded-2xl shadow-2xl max-w-full h-auto"
               onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e0e0e0/707070?text=Imagem+Principal'; }}
             />
           </div>
         </div>
       </section>
 
-      {/* */}
+      {/* SEÇÃO BENEFÍCIOS */}
       <section id="benefits" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -298,7 +301,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* */}
+      {/* SEÇÃO PRODUTOS */}
       <section id="products" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -317,7 +320,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* */}
+      {/* NOVA SEÇÃO DE CATÁLOGO */}
+      <section id="catalog" className="py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden grid md:grid-cols-2 items-center">
+            <div className="p-8 md:p-12 order-2 md:order-1">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-green-800 mb-4">
+                Nosso Catálogo Completo
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Veja todos os detalhes, informações nutricionais e benefícios de cada produto em nosso catálogo digital.
+              </p>
+              <a
+                href="Catalogo-Oleo-de-Chia.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-orange-500 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transition-all duration-300 hover:bg-orange-600 hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Baixar Catálogo (PDF)
+              </a>
+            </div>
+            <div className="order-1 md:order-2">
+              <img
+                src={OleoDeChiaComSemAboboraImg}
+                alt="Catálogo de produtos Nutracelticos"
+                className="w-full h-64 md:h-full object-cover"
+                onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e0e0e0/707070?text=Catálogo'; }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NOVA SEÇÃO DE VÍDEO */}
+      <section id="video-section" className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-green-800 mb-4">
+              Tempere sua Vida com Saúde
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Veja como é simples transformar sua refeição em um ato de cuidado.
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <video
+              src={TempereVideo}
+              className="w-full rounded-2xl shadow-2xl"
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={SaladaImg} // Usa a imagem de salada como pôster
+            >
+              Seu navegador não suporta o vídeo.
+            </video>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO COMO USAR */}
       <section id="how-to-use" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -350,7 +413,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* */}
+      {/* SEÇÃO DEPOIMENTOS */}
       <section id="testimonials" className="py-20 bg-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -393,7 +456,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* */}
+      {/* SEÇÃO FAQ */}
       <section id="faq" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <div className="text-center mb-16">
@@ -418,7 +481,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* */}
+      {/* SEÇÃO CTA (CALL TO ACTION) */}
       <section className="py-20 bg-green-700 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
@@ -437,9 +500,6 @@ export default function Home() {
           </a>
         </div>
       </section>
-
-      {/* */}
-
 
       {/* Botão de Voltar ao Topo */}
       <ScrollToTopButton onScrollTo={handleScrollTo} />
