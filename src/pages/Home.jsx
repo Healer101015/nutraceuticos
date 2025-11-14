@@ -135,101 +135,7 @@ function ProductCard({ product }) {
   );
 }
 
-// --- COMPONENTE DO NAVBAR ---
-function Navbar({ onScrollTo }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const WHATSAPP_NUMBER = "5511988865882";
-  const WHATSAPP_GREETING = "Olá! Gostaria de saber mais sobre os óleos nutracêuticos";
-  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_GREETING)}`;
-
-  const navLinks = [
-    { name: "Benefícios", href: "#benefits" },
-    { name: "Produtos", href: "#products" },
-    { name: "FAQ", href: "#faq" },
-  ];
-
-  return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div
-            className="flex-shrink-0 flex items-center cursor-pointer"
-            onClick={() => onScrollTo('#home')}
-          >
-            <Leaf className="h-8 w-8 text-green-700" />
-            <span className="text-2xl font-extrabold text-green-800 ml-2">
-              Nutracelticos
-            </span>
-          </div>
-
-          {/* Links Desktop */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
-            {navLinks.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => onScrollTo(item.href)}
-                className="text-gray-600 hover:text-green-700 font-medium transition-colors"
-              >
-                {item.name}
-              </button>
-            ))}
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-green-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg transition-all duration-300 hover:bg-green-600 hover:shadow-xl"
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Fale Conosco
-            </a>
-          </div>
-
-          {/* Botão Mobile */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="text-gray-500 hover:text-green-700 focus:outline-none focus:text-green-700"
-              aria-label="Abrir menu"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Menu Mobile */}
-      {isOpen && (
-        <div className="md:hidden shadow-lg border-t">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => {
-                  onScrollTo(item.href);
-                  setIsOpen(false);
-                }}
-                className="text-gray-600 hover:bg-green-50 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-              >
-                {item.name}
-              </button>
-            ))}
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 text-white px-4 py-3 rounded-lg font-bold text-sm shadow-lg transition-all duration-300 hover:bg-green-600 w-full flex items-center justify-center mt-2"
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Fale Conosco
-            </a>
-          </div>
-        </div>
-      )}
-    </nav>
-  );
-}
+// --- COMPONENTE DO NAVBAR (REMOVIDO DAQUI) ---
 
 // --- COMPONENTE FAQ ---
 function FaqItem({ faq, index, openIndex, setOpenIndex }) {
@@ -295,8 +201,9 @@ function ScrollToTopButton({ onScrollTo }) {
 }
 
 
-// --- COMPONENTE PRINCIPAL DA APLICAÇÃO ---
-export default function App() {
+// --- COMPONENTE PRINCIPAL DA PÁGINA ---
+// (Nome alterado de App para Home)
+export default function Home() {
 
   // Função de rolagem suave
   const handleScrollTo = (selector) => {
@@ -324,10 +231,12 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState(-1);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 font-sans" id="home">
-      <Navbar onScrollTo={handleScrollTo} />
-
-      {/* <!-- Hero Section --> */}
+    // O div principal foi removido, pois o `App.jsx` já fornece o container
+    // O id="home" foi movido para o elemento raiz em `App.jsx` se necessário,
+    // mas a função handleScrollTo já trata o seletor '#home' levando ao topo (0,0).
+    // Para manter o layout, vamos usar React.Fragment
+    <>
+      {/* */}
       <section className="bg-gradient-to-r from-green-50 to-green-100 py-20 md:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           <div className="text-center md:text-left">
@@ -364,7 +273,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* <!-- Benefits Section --> */}
+      {/* */}
       <section id="benefits" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -389,7 +298,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* <!-- Products Section --> */}
+      {/* */}
       <section id="products" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -408,7 +317,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* <!-- How to Use Section --> */}
+      {/* */}
       <section id="how-to-use" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -441,7 +350,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* <!-- Testimonials Section --> */}
+      {/* */}
       <section id="testimonials" className="py-20 bg-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -484,7 +393,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* <!-- FAQ Section --> */}
+      {/* */}
       <section id="faq" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <div className="text-center mb-16">
@@ -509,7 +418,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* <!-- Final CTA Section --> */}
+      {/* */}
       <section className="py-20 bg-green-700 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
@@ -529,11 +438,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* <!-- Footer --> */}
+      {/* */}
 
 
       {/* Botão de Voltar ao Topo */}
       <ScrollToTopButton onScrollTo={handleScrollTo} />
-    </div>
+    </>
   );
 }
